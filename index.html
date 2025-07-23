@@ -584,7 +584,10 @@
             }
         }
 
-        // --- Alexandria Weather Widget (Styled, Reusable) ---
+        // --- Alexandria Weather Widget (API Key and Pi IP fix) ---
+        const apiKey = "26204a9abe55b0443f9659682e55de7e";
+        const PI_IP = "10.0.0.187"; // Use Pi's IP for backend API if needed
+
         function renderAlexandriaWeatherWidget() {
             const weatherCard = document.getElementById('weather-card');
             weatherCard.innerHTML = `
@@ -594,21 +597,15 @@
                     <p class="text-lg">Loading weather for Alexandria...</p>
                 </div>
             `;
-            // Style error message
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.style.display = 'none';
-
-            // Fetch and display weather
             fetchWeatherForCity('Alexandria, VA, US');
         }
-
-        const apiKey = "26204a9abe55b0443f9659682e55de7e";
 
         async function fetchWeatherForCity(city) {
             hideError();
             const weatherDisplay = document.getElementById('weatherDisplay');
             const errorMessage = document.getElementById('errorMessage');
             weatherDisplay.innerHTML = '<p class="text-lg">Fetching weather...</p>';
+            // Use direct OpenWeatherMap API (no backend needed)
             const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
             try {
                 const response = await fetch(apiUrl);
@@ -658,7 +655,6 @@
             errorMessage.style.display = 'none';
         }
 
-        // Render Alexandria weather widget on page load
         window.addEventListener('DOMContentLoaded', renderAlexandriaWeatherWidget);
 
         // --- Settings Modal Logic ---
