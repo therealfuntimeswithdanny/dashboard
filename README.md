@@ -76,5 +76,25 @@ Add this line at the end:
 @reboot cd ~/simpleserver && zsh start_servers.sh
 ```
 
+## 10. Updating Files on Your Pi
+If you make changes to files on your Mac, copy only the updated files to your Raspberry Pi using `scp`:
+```sh
+scp /Users/danny/Desktop/simpleserver/<filename> <user-name>@<raspberry-pi-ip>:~/simpleserver/
+```
+Replace `<filename>`, `<user-name>`, and `<raspberry-pi-ip>` as needed.
+
+If you update Python files, restart the servers on your Pi:
+```sh
+pkill -f app.py
+pkill -f server.py
+zsh start_servers.sh
+```
+Or use `bash start_servers.sh` if you switched to bash.
+
+**Tip:** For syncing entire folders, use `rsync`:
+```sh
+rsync -avz /Users/danny/Desktop/simpleserver/ <user-name>@<raspberry-pi-ip>:~/simpleserver/
+```
+
 ---
 **Tip:** If you want to access your dashboard from outside your home network, you will need to set up port forwarding on your router.
