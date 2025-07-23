@@ -105,6 +105,54 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Weather widget specific styles */
+        #weather-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #weather-card h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #weather-card .weather-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #weather-card .weather-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        #weather-card .error-message {
+            color: #e53e3e; /* Red-600 */
+            margin-bottom: 10px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Alexandria weather widget specific styles */
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .detail-item {
+            flex: 1;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-5">
@@ -131,9 +179,11 @@
             <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <!-- Weather Card -->
                 <div id="weather-card" class="bg-purple-300 p-6 rounded-lg shadow-md flex flex-col items-center justify-center min-h-[150px] sm:min-h-[200px] text-center">
-                    <p class="text-2xl font-bold text-purple-900 mb-2" id="weather-city">Loading Weather...</p>
-                    <p class="text-5xl font-extrabold text-purple-900" id="weather-temp"></p>
-                    <p class="text-xl text-purple-800 mt-2" id="weather-description"></p>
+                    <h1 class="text-3xl font-bold mb-4">Weather in Alexandria</h1>
+                    <div id="errorMessage" class="error-message"></div>
+                    <div id="weatherDisplay" class="weather-info mt-6">
+                        <p class="text-lg">Loading weather for Alexandria...</p>
+                    </div>
                 </div>
 
                 <!-- Clock Card -->
@@ -533,6 +583,83 @@
                 showMessage('Geolocation is not supported by your browser.', true);
             }
         }
+
+        // --- Alexandria Weather Widget (Styled, Reusable) ---
+        function renderAlexandriaWeatherWidget() {
+            const weatherCard = document.getElementById('weather-card');
+            weatherCard.innerHTML = `
+                <h1 class="text-3xl font-bold mb-4">Weather in Alexandria</h1>
+                <div id="errorMessage" class="error-message"></div>
+                <div id="weatherDisplay" class="weather-info mt-6">
+                    <p class="text-lg">Loading weather for Alexandria...</p>
+                </div>
+            `;
+            // Style error message
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+
+            // Fetch and display weather
+            fetchWeatherForCity('Alexandria, VA, US');
+        }
+
+        const apiKey = "26204a9abe55b0443f9659682e55de7e";
+
+        async function fetchWeatherForCity(city) {
+            hideError();
+            const weatherDisplay = document.getElementById('weatherDisplay');
+            const errorMessage = document.getElementById('errorMessage');
+            weatherDisplay.innerHTML = '<p class="text-lg">Fetching weather...</p>';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                if (response.ok) {
+                    displayWeather(data);
+                } else {
+                    showError(data.message || 'Could not retrieve weather data. Please try again.');
+                }
+            } catch (error) {
+                showError('An error occurred while fetching weather data. Please check your internet connection.');
+            }
+        }
+
+        function displayWeather(data) {
+            const weatherDisplay = document.getElementById('weatherDisplay');
+            const { name, main, weather, wind } = data;
+            const temperature = main.temp;
+            const description = weather[0].description;
+            const humidity = main.humidity;
+            const windSpeed = wind.speed;
+            weatherDisplay.innerHTML = `
+                <h2 class="text-4xl font-bold mb-2">${name}</h2>
+                <p class="text-3xl font-semibold mb-2">${temperature}°C</p>
+                <p class="text-xl capitalize mb-4">${description}</p>
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <p>Humidity: ${humidity}%</p>
+                    </div>
+                    <div class="detail-item">
+                        <p>Wind Speed: ${windSpeed} m/s</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            document.getElementById('weatherDisplay').innerHTML = '';
+        }
+
+        function hideError() {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+        }
+
+        // Render Alexandria weather widget on page load
+        window.addEventListener('DOMContentLoaded', renderAlexandriaWeatherWidget);
 
         // --- Settings Modal Logic ---
         const settingsBtn = document.getElementById('settings-btn');

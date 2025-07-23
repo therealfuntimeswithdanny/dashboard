@@ -1,10 +1,12 @@
-Traceback (most recent call last):
-  File "/Users/danny/Desktop/simpleserver/server.py", line 9, in <module>
-    server = HTTPServer(("", PORT), Handler)
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py", line 452, in __init__
-    self.server_bind()
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/server.py", line 138, in server_bind
-    socketserver.TCPServer.server_bind(self)
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socketserver.py", line 466, in server_bind
-    self.socket.bind(self.server_address)
-OSError: [Errno 48] Address already in use
+127.0.0.1 - - [22/Jul/2025 21:02:27] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [22/Jul/2025 21:03:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:06:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:06:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:06:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:07:02] "GET / HTTP/1.1" 304 -
+127.0.0.1 - - [22/Jul/2025 21:07:39] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:07:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:10:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:10:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:11:06] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Jul/2025 21:11:12] "GET / HTTP/1.1" 200 -

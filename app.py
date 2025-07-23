@@ -1,3 +1,6 @@
+import psutil
+import socket
+import time
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -37,6 +40,30 @@ def update_dashboard():
     data = request.json
     save_data(data)
     return jsonify({"status": "success"})
+
+@app.route("/api/systeminfo", methods=["GET"])
+def system_info():
+    # CPU usage
+    cpu = psutil.cpu_percent(interval=0.5)
+    # RAM usage
+    ram = psutil.virtual_memory().percent
+    # Disk usage
+    disk = psutil.disk_usage('/').percent
+    # Uptime
+    uptime_seconds = time.time() - psutil.boot_time()
+    uptime = time.strftime('%H:%M:%S', time.gmtime(uptime_seconds))
+    # IP address
+    try:
+        ip = socket.gethostbyname(socket.gethostname())
+    except Exception:
+        ip = 'N/A'
+    return jsonify({
+        "cpu": round(cpu, 1),
+        "ram": round(ram, 1),
+        "disk": round(disk, 1),
+        "uptime": uptime,
+        "ip": ip
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5050, debug=True)
