@@ -20,3 +20,12 @@
 127.0.0.1 - - [22/Jul/2025 21:17:25] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [22/Jul/2025 21:17:26] "GET / HTTP/1.1" 200 -
 127.0.0.1 - - [22/Jul/2025 21:17:28] "GET / HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 21:46:32] "GET / HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 21:46:32] code 404, message File not found
+10.0.0.187 - - [22/Jul/2025 21:46:32] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 -
+10.0.0.187 - - [22/Jul/2025 21:46:32] code 404, message File not found
+10.0.0.187 - - [22/Jul/2025 21:46:32] "GET /apple-touch-icon.png HTTP/1.1" 404 -
+10.0.0.187 - - [22/Jul/2025 21:46:32] code 404, message File not found
+10.0.0.187 - - [22/Jul/2025 21:46:32] "GET /favicon.ico HTTP/1.1" 404 -
+10.0.0.187 - - [22/Jul/2025 21:46:36] "GET / HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 22:02:54] "GET / HTTP/1.1" 200 -

@@ -27,3 +27,5 @@
 10.0.0.47 - - [22/Jul/2025 21:22:22] "GET /api/dashboard HTTP/1.1" 200 -
 10.0.0.47 - - [22/Jul/2025 21:22:27] "OPTIONS /api/dashboard HTTP/1.1" 200 -
 10.0.0.47 - - [22/Jul/2025 21:22:27] "POST /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 21:46:32] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 21:46:36] "GET /api/dashboard HTTP/1.1" 200 -

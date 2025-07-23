@@ -1,13 +1,23 @@
 # Deploying Your Python Dashboard on Raspberry Pi
 
+## Quick Install via Git
+
+Clone the dashboard repository directly to your Raspberry Pi:
+```sh
+git clone https://github.com/therealfuntimeswithdanny/dashboard.git ~/simpleserver
+cd ~/simpleserver
+```
+
+Continue with the steps below to set up and run the dashboard.
+
 ## Prerequisites
 - Raspberry Pi running Raspberry Pi OS (or similar)
 - Python 3 installed
 - Internet connection
 - SSH
 
-## 1. Transfer Your Project
-Copy your entire `simpleserver` folder to your Raspberry Pi using SCP:
+## 1. Transfer Your Project (Manual Option)
+If you prefer manual transfer, copy your entire `simpleserver` folder to your Raspberry Pi using SCP:
 ```sh
 scp -r /Users/danny/Desktop/simpleserver <user-name>@<raspberry-pi-ip>:~/
 ```
@@ -37,7 +47,7 @@ source .venv/bin/activate
 
 ## 5. Install Dependencies
 ```sh
-pip install flask flask-cors
+pip install flask flask-cors psutil
 ```
 
 ## 6. Start the Servers
