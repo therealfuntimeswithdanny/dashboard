@@ -4,64 +4,76 @@
 - Raspberry Pi running Raspberry Pi OS (or similar)
 - Python 3 installed
 - Internet connection
+- SSH
 
 ## 1. Transfer Your Project
-Copy your entire `simpleserver` folder to your Raspberry Pi, e.g. using SCP:
+Copy your entire `simpleserver` folder to your Raspberry Pi using SCP:
 ```sh
-scp -r /Users/danny/Desktop/simpleserver pi@<raspberry-pi-ip>:/home/pi/
+scp -r /Users/danny/Desktop/simpleserver <user-name>@<raspberry-pi-ip>:~/
 ```
-Replace `<raspberry-pi-ip>` with your Pi's IP address.
+Replace `<raspberry-pi-ip>` with your Pi's IP address (e.g. `10.0.0.187` or `raspberrypi.local`).
+Replace `<user-name>` with your Pi username (often `pi` or `danny`).
 
-## 2. Install Python and pip
-Make sure Python 3 and pip are installed:
+## 2. SSH into your Pi
+```sh
+ssh <user-name>@<raspberry-pi-ip>
+```
+
+## 3. Install Python and pip
+Make sure Python 3 and venv are installed:
 ```sh
 sudo apt update
-sudo apt install python3 python3-pip python3-venv
+sudo apt install python3 python3-pip python3-venv zsh
 ```
 
-## 3. Set Up Virtual Environment
+## 4. Set Up Virtual Environment
 Navigate to your project folder:
 ```sh
 cd ~/simpleserver
+rm -rf .venv  # Remove any broken venv
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-## 4. Install Dependencies
+## 5. Install Dependencies
 ```sh
 pip install flask flask-cors
 ```
 
-## 5. Start the Servers
+## 6. Start the Servers
 Make the script executable:
 ```sh
 chmod +x start_servers.sh
 ```
-Run the script:
+Run the script (use zsh or bash):
 ```sh
-./start_servers.sh
+zsh start_servers.sh
+```
+Or, if you prefer bash, edit the first line of `start_servers.sh` to `#!/bin/bash` and run:
+```sh
+bash start_servers.sh
 ```
 
-## 6. Access the Dashboard
+## 7. Access the Dashboard
 - Find your Pi's IP address: `hostname -I`
 - On any device on your network, open a browser and go to:
   - `http://<raspberry-pi-ip>:8000`
 
-## 7. Stopping the Servers
+## 8. Stopping the Servers
 To stop both servers, use the `kill` command shown by the script, or:
 ```sh
 pkill -f app.py
 pkill -f server.py
 ```
 
-## 8. (Optional) Autostart on Boot
+## 9. (Optional) Autostart on Boot
 To run the servers automatically on boot, add the start command to your crontab:
 ```sh
 crontab -e
 ```
 Add this line at the end:
 ```
-@reboot cd /home/pi/simpleserver && ./start_servers.sh
+@reboot cd ~/simpleserver && zsh start_servers.sh
 ```
 
 ---

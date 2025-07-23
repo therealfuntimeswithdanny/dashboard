@@ -9,3 +9,13 @@
  * Debugger is active!
  * Debugger PIN: 662-939-410
 10.0.0.187 - - [22/Jul/2025 20:18:30] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.47 - - [22/Jul/2025 20:32:56] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.47 - - [22/Jul/2025 20:34:30] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.47 - - [22/Jul/2025 20:34:54] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 20:35:44] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 20:35:50] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 20:35:56] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 20:35:57] "GET /api/dashboard HTTP/1.1" 200 -
+10.0.0.47 - - [22/Jul/2025 20:35:59] "OPTIONS /api/dashboard HTTP/1.1" 200 -
+10.0.0.47 - - [22/Jul/2025 20:35:59] "POST /api/dashboard HTTP/1.1" 200 -
+10.0.0.187 - - [22/Jul/2025 20:36:01] "GET /api/dashboard HTTP/1.1" 200 -
